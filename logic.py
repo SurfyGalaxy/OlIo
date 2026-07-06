@@ -2,38 +2,16 @@ import random
 
 MAX_INT_SIZE = 127
 MIN_INT_SIZE = -128
-difficulty = 10
-
-def make_new_problem() -> tuple:
-    operator = random.randint(1, 4)
-    a = random.randint(MIN_INT_SIZE, MAX_INT_SIZE)
-    b = random.randint(MIN_INT_SIZE, MAX_INT_SIZE)
-
-    if a == 0 and b == 0:
-        a = nonzero_int(a)
-
-
-    if operator == 1: 
-        operator = "+"
-    elif operator == 2:
-        operator = "-"
-    elif operator == 3:
-        operator = "*"
-    else:
-        operator = "/"
-        if b == 0:
-            b = nonzero_int()
-    
-    return (a, operator, b)
+difficulty = 2
 
 def nonzero_int() -> int:
     if random.choice([True, False]):
         return random.randint(1, MAX_INT_SIZE)
     return random.randint(MIN_INT_SIZE, -1)
 
-def make_new_problem() -> list:
+def make_new_problem() -> str:
     equation = [random.randint(MIN_INT_SIZE, MAX_INT_SIZE)]
-    size = difficulty
+    size = difficulty - 1
     while size > 0:
         operator = random.randint(1, 4)
         if operator == 1:
@@ -49,4 +27,5 @@ def make_new_problem() -> list:
             equation.append("/")
             equation.append(nonzero_int())
         size -= 1
+    equation = ''.join(str(item) for item in equation)
     return equation
